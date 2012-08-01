@@ -18,18 +18,18 @@ module Survey
     end
 
     def copy_migrations
-#      migration_template "migrations/create_survey_question_categories.rb", "db/migrate/create_survey_question_categories.rb"
-#      migration_template "migrations/create_survey_questions.rb", "db/migrate/create_survey_questions.rb"
-#      migration_template "migrations/create_survey_question_sets.rb", "db/migrate/create_survey_question_sets.rb"
-#      migration_template "migrations/create_survey_question_set_items.rb", "db/migrate/create_survey_question_set_items.rb"
-#      migration_template "migrations/create_survey_validations.rb", "db/migrate/create_survey_validations.rb"
-#      migration_template "migrations/create_survey_question_validations.rb", "db/migrate/create_survey_question_validations.rb"
-#      migration_template "migrations/create_survey_question_selections.rb", "db/migrate/create_survey_question_selections.rb"
-#      migration_template "migrations/create_survey_question_set_item_conditions.rb", "db/migrate/create_survey_question_set_item_conditions.rb"
-#      migration_template "migrations/create_survey_question_set_item_condition_validations.rb", "db/migrate/create_survey_question_set_item_condition_validations.rb"
-#      migration_template "migrations/create_survey_question_set_item_condition_selections.rb", "db/migrate/create_survey_question_set_item_condition_selections.rb"
-#      migration_template "migrations/create_survey_evaluations.rb", "db/migrate/create_survey_evaluations.rb"
-#      migration_template "migrations/create_survey_evaluation_items.rb", "db/migrate/create_survey_evaluation_items.rb"
+      migration_template "migrations/create_survey_question_categories.rb", "db/migrate/create_survey_question_categories.rb"
+      migration_template "migrations/create_survey_questions.rb", "db/migrate/create_survey_questions.rb"
+      migration_template "migrations/create_survey_question_sets.rb", "db/migrate/create_survey_question_sets.rb"
+      migration_template "migrations/create_survey_question_set_items.rb", "db/migrate/create_survey_question_set_items.rb"
+      migration_template "migrations/create_survey_validations.rb", "db/migrate/create_survey_validations.rb"
+      migration_template "migrations/create_survey_question_validations.rb", "db/migrate/create_survey_question_validations.rb"
+      migration_template "migrations/create_survey_question_selections.rb", "db/migrate/create_survey_question_selections.rb"
+      migration_template "migrations/create_survey_question_set_item_conditions.rb", "db/migrate/create_survey_question_set_item_conditions.rb"
+      migration_template "migrations/create_survey_question_set_item_condition_validations.rb", "db/migrate/create_survey_question_set_item_condition_validations.rb"
+      migration_template "migrations/create_survey_question_set_item_condition_selections.rb", "db/migrate/create_survey_question_set_item_condition_selections.rb"
+      migration_template "migrations/create_survey_evaluations.rb", "db/migrate/create_survey_evaluations.rb"
+      migration_template "migrations/create_survey_evaluation_items.rb", "db/migrate/create_survey_evaluation_items.rb"
     end
 
     def add_intializer
