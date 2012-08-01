@@ -1,0 +1,11 @@
+<h1>Edit Survey Question Set Item</h1>
+
+<%= form_for @survey_question_set_item do |f| %>
+	
+	<%= render 'fields', :f => f %>
+
+	<div class = "actions" >
+		<%= f.submit "Update Question Set Item" %>
+	</div>
+
+<% end %>

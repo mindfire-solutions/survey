@@ -1,0 +1,8 @@
+<% if @facebox_id %>
+  $.facebox("<%=  escape_javascript( render :template => '/survey/survey_question_categories/new.html.erb' ) %>", false, "<%= @facebox_id %>");
+<% else %>
+  $.facebox("<%=  escape_javascript( render :template => '/survey/survey_question_categories/new.html.erb' ) %>");
+<% end %>
+$('.facebox .content').css('width', '400px');
+$('.facebox').css('left', '38%');
+$('#edit_overlay').remove();

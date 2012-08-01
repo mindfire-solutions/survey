@@ -1,0 +1,5 @@
+<%= f.label "Add Selections" %>
+
+<%= f.fields_for :selections do |ff| %>
+  <%= render 'selection', :ff => ff %>
+<% end %>

@@ -1,0 +1,19 @@
+<% @survey_question_sets.each do |set| %>
+<ul id="set_<%= set.id %>">
+  <% set.evaluations.each do |evaluation| %>
+    <li>
+      <span>
+        <%= evaluation.id %>
+      </span>
+      
+      <span class="actions">
+        <%= link_to "Edit", survey_evaluation_path(evaluation), :remote => true %>
+      </span>
+
+      <span class="actions">
+        <%= link_to "Delete", survey_evaluation_path(evaluation), :method => :delete %>
+      </span>
+    </li>
+  <% end %>
+</ul>
+<% end %>

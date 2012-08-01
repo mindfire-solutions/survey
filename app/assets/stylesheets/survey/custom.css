@@ -1,0 +1,600 @@
+form {
+  margin-bottom: 0;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"], input[type="url"], input[type="email"], input.text, input.title, textarea, select {
+  margin: 0.5em 0;
+}
+
+input[type="text"], input[type="password"], input[type="url"], input[type="email"], input.text, input.title, textarea {
+  background-color: #FFFFFF;
+  border: 1px solid #BBBBBB;
+  color: #000000;
+}
+
+select {
+  background-color: #FFFFFF;
+  border-style: solid;
+  border-width: 1px;
+}
+
+ul {
+  padding-left: 0.75em;
+  margin: 0;
+}
+
+ul ul {
+  margin-left: 5px;
+}
+
+.section {
+  margin-top: 1em;
+  padding: 20px;
+/*	background: #fff;*/
+}
+
+/*Label*/
+label {
+  font-weight: bold;
+}
+
+/* Links */
+
+a {
+  color: #09c;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #069;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #069;
+}
+
+/* Round corners */
+
+.round {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius:10px;
+}
+
+.fields {
+  margin-left: 10px;
+}
+
+div.actions {
+  clear: both;
+  text-align: right;
+  margin: 10px 5px 0 0;
+}
+
+/* Errors
+
+.field_with_errors {
+  margin-top: 10px;
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+*/
+
+.field_with_errors {
+  display: inline-block;
+}
+
+.field_with_errors input, .field_with_errors select {
+  border: 1px solid red;
+}
+
+#error_explanation {
+  width: 400px;
+  border: 2px solid #444;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px -7px 0;
+  background-color: #444;
+  color: #fff;
+}
+
+#error_explanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: circle inside;
+}
+
+input[type=checkbox] {
+  vertical-align: middle;
+}
+
+input[type=radio] {
+  vertical-align: top;
+}
+
+/*Tabs*/
+
+.tabs {
+  margin: 20px 5px 3px;
+}
+
+.tabs .tab{
+  border: 1px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
+  margin-right: -1px;
+  background: #EFEFEF;
+}
+
+.tabs .tab.selected {
+  border-bottom: 1px solid #fcfcfc;
+  background: #FFF !important;
+  color: #000;
+}
+
+/*Question Sets*/
+
+#show_choose_items, #show_selected_items {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-top-width: 3px;
+}
+
+.choose_from {
+  float: left;
+  width: 40%;
+}
+
+#list_question_categories li {
+  clear: both;
+}
+
+.show_category_items {
+  margin-left: 40%;
+  width: 60%;
+}
+
+#show_questions, #show_question_sets {
+  padding: 10px;
+  border: 1px solid #ccc;
+  height: 100px;
+  width: 355px;
+  overflow: auto;
+  white-space: nowrap;
+  border-top-width: 3px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.selected, .selected a {
+  background-color: #F07746 !important;
+  color: white;
+}
+
+#hidden_conditions {
+  display: none;
+}
+
+#show_selected_items span.title {
+  width: 60%;
+  display: inline-block;
+}
+
+#show_selected_items span.actions {
+  width: 5%;
+  display: inline-block;
+}
+
+#show_selected_items span.item_type {
+  width: 15%;
+  display: inline-block;
+}
+
+#show_selected_items input[type="checkbox"] {
+  display: none;
+}
+
+.item_conditions {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 25px;
+  display: none;
+  margin-top: 10px;
+}
+
+.item_conditions .add_link {
+  float: right;
+}
+
+.conditions_container {
+  clear: both;
+}
+
+.add_question a, .add_question_set a, .add_category a{
+  background: url("/assets/survey/ui-icons.png") no-repeat scroll 28px -190px transparent;
+  float: right;
+  height: 20px;
+  margin-right: 10px;
+  /*text-indent: -3000px;*/
+  width: 45px;
+}
+
+.actions a.edit {
+  background: url("/assets/survey/ui-icons.png") repeat scroll 195px -110px transparent;
+  float: left;
+  height: 20px;
+  text-indent: -3000px;
+  width: 21px;
+}
+
+.actions a.delete {
+  background: url("/assets/survey/ui-icons.png") repeat scroll 82px -94px transparent;
+  float: left;
+  height: 20px;
+  text-indent: -3000px;
+  width: 21px;
+}
+
+.actions a.disabled_delete {
+  background: url("/assets/survey/ui-icons.png") repeat scroll 130px -79px transparent;
+  float: left;
+  height: 20px;
+  text-indent: -3000px;
+  width: 21px;
+}
+
+body.survey_question_set div.facebox {
+  position: fixed;
+  top: 200px !important;
+}
+
+.expand, .collapse, .dot {
+  /*color: #0099CC;
+  cursor: pointer;
+  font-size: 13px;
+  vertical-align: top;*/
+
+  color: #0099CC;
+  cursor: pointer;
+  float: left;
+  font-size: 13px;
+  height: 18px;
+  text-indent: -3000px;
+  vertical-align: top;
+  width: 10px;
+}
+
+.collapse {
+  background: url("/assets/survey/ui-icons.png") repeat scroll -69px -14px transparent;
+}
+
+.expand {
+  background: url("/assets/survey/ui-icons.png") repeat scroll -37px -15px transparent;
+  display: none;
+}
+
+.dot {
+  background: url("/assets/survey/ui-icons.png") repeat scroll -117px -141px transparent;
+  height: 16px;
+}
+
+.clr_float {
+  clear: both;
+}
+
+#validations, #selections {
+  margin-top: 15px;
+}
+
+#validation_list {
+  border: 1px solid #CCCCCC;
+  height: 110px;
+  overflow: auto;
+  width: 360px;
+}
+
+span.validation_title {
+  display: inline-block;
+  width: 335px;
+}
+
+span.validation_params {
+  border: 2px solid #333333;
+  display: none;
+  height: 90px;
+  right: 100%;
+  padding: 10px;
+  position: absolute;
+  top:56%;
+  width: 170px;
+  background-color: #fff;
+  border-right: medium none;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+  border-radius: 3px 0 0 3px;
+}
+
+.condition_fields #validations
+{
+  /*width: 650px;*/
+}
+
+.condition_fields span.validation_params {
+  top: 44.7%;
+  right: 100%;
+}
+
+span.validation_params div label {
+  display: inline-block;
+  min-width: 30px;
+  width: auto !important;
+  text-align: right;
+  margin-right: 10px;
+}
+
+span.validation_params input[type=text] {
+  width: auto;
+}
+
+ul.hierarchy, span.inner_span {
+  margin-left: 0.5em;
+}
+
+.question_tree {
+  float: left;
+  overflow: auto;
+  width: 58%;
+}
+
+#selected_question {
+  margin-left: 60%;
+}
+
+#selected_question input[type=text], #selected_question select{
+  width: 220px;
+}
+
+.categories {
+  display: inline;
+  width: 25%;
+  height: 400px;
+  overflow: auto;
+  float: left;
+  border: 1px solid #ccc;
+  padding-top: 15px;
+  position: relative;
+}
+
+.add_category {
+  margin-bottom: 25px;
+}
+
+.list_content {
+  display: inline-block;
+  width: 73%;
+  margin-left: 1.5%;
+}
+
+.list_content .question_title, .question_set_title {
+  width:45%;
+}
+
+.list_content select, .list_content input[type=text],
+.evaluation_container select, .evaluation_container input[type=text] {
+  width: auto;
+}
+
+.list_content .actions {
+  width: 20%;
+}
+
+span.actions, .evaluations span.actions {
+  display: inline-block;
+  width: 8%;
+}
+
+body.survey_questions .facebox .content {
+  padding: 25px;
+}
+
+body.survey_questions .facebox {
+  top: 100px !important;
+}
+
+.facebox .popup {
+  padding: 0 20px;
+}
+
+.facebox .content {
+  display: block !important;
+  padding: 25px !important;
+}
+
+.facebox h1 {
+  font-size: 2em;
+}
+
+.facebox .content label {
+  width: 105px;
+  display: inline-block;
+}
+
+select {
+  width: 252px;
+}
+
+input[type=text] {
+  width: 250px;
+}
+
+.facebox .popup {
+  border: 5px solid #333 !important;
+}
+
+.facebox table {
+  width: 100%;
+}
+
+body.survey_question_sets .facebox .content, body.survey_evaluations .facebox .content {
+  width: 650px;
+}
+
+#show_choose_items label, #show_selected_items label, .facebox .content .dataTables_filter label,
+#hidden_conditions label, body.survey_question_sets .facebox .content .validation_title label,
+#selected_question label, .facebox .content .dataTables_length label {
+  width: auto;
+  display: inline;
+}
+
+.dataTable thead tr {
+  border-bottom: 1px solid;
+}
+
+ul.survey_evaluations {
+  display: inline;
+  margin: 20px 0 auto auto;
+}
+
+div.evaluation_items {
+  width: 65%;
+  margin-left: 1%;
+  display: inline-block;
+
+}
+
+.dataTables_filter {
+  width: 55% !important;
+}
+
+div.evaluation_items ul {
+  margin-bottom: 0;
+  padding-left: 1.5em;
+}
+
+div.evaluation_items .evaluation_container {
+  display: none;
+}
+
+ul.survey_evaluations form {
+  display: inline-block;
+}
+
+span.title, .survey_evaluations .evaluation_title {
+  cursor: pointer;
+}
+
+.evaluations span {
+  width: 85px;
+  display: inline-block;
+  text-align: center;
+}
+
+.evaluations span.time {
+  width: 175px;
+}
+
+.content .evaluation_container {
+  margin-top: 15px;
+}
+
+thead th {
+  background: none;
+}
+
+.expand_or_collapse {
+  display: inline-block;
+  width: 10px;
+}
+
+#cat-all{
+  float: left;
+  margin-left: 10px;
+}
+
+#evaluation_list {
+  float: left;
+  width: 100%;
+}
+
+p.description {
+  clear: both;
+  color: #999999;
+  font-size: 12px;
+  font-style: italic;
+  padding-top: 10px;
+}
+
+label.selection_label {
+	margin-left: 5px;
+}
+
+#show_choose_items .loader_container, #edit_overlay .loader_container {
+  width: 30px;
+  margin: 30px auto;
+  height: 30px;
+  text-align: center;
+}
+
+#edit_overlay .loader_container .loading {
+  margin-top: 10px;
+}
+#edit_overlay {
+  z-index: 2147483647;
+  background: #FFF;
+  opacity: 0.5;
+}
+
+#edit_overlay .loader_container {
+  background: #000;
+}
+
+#edit_overlay .loader_container {
+  margin-top: 300px;
+}
+
+#edit_overlay .loader_container, #evaluation_overlay .loader_container{
+  width: 50px;
+  height: 50px;
+}
+
+#evaluation_overlay {
+  position: relative;
+}
+
+#evaluation_overlay .loading {
+  margin-top: 20px;
+}
+
+.dataTable .loading_cell {
+  text-align: center;
+  height: 150px;
+}
+
+.calendar {
+  margin-left: 5px;
+}

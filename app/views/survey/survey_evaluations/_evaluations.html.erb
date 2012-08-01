@@ -1,0 +1,34 @@
+<div id="set_<%= @survey_question_set.id %>" class="evaluation_container">
+  <table id="set_table_<%= @survey_question_set.id %>" class="evaluations" >
+    <thead>
+            <th>Evaluation</th>
+            <th>Status</th>
+            <th class="time">Start time</th>
+            <th>actions</th>
+    </thead>
+    
+    <tbody>
+
+      <% @evaluations.each do |evaluation| %>
+        <tr>
+          <td>
+            <%= evaluation.id %>
+          </td>
+          <td>
+            <%= evaluation.status %>
+          </td>
+          <td class="time">
+            <%= evaluation.created_at %>
+          </td>
+          <td class="actions">
+            <%= link_to "Edit", edit_survey_evaluation_path(evaluation), :remote => true,
+              :class => "edit" %>
+            <%= link_to "Delete", survey_evaluation_path(evaluation), :method => :delete,
+              :confirm => 'Are you sure?', :class => "delete" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    
+  </table>
+</div>

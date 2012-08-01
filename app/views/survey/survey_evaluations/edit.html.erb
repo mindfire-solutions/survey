@@ -1,0 +1,16 @@
+<h1>Edit Survey Evaluation</h1>
+<%= form_for @survey_evaluation do |f| %>
+  <%= f.hidden_field :status, :value => "completed" %>
+  <%= hidden_field_tag :eval_id, @survey_evaluation.id %>
+  <div class="question_tree">
+    <%= evaluate_sets( @survey_question_set ).html_safe %>
+  </div>
+
+  <div id="selected_question">
+
+  </div>
+
+  <div class="actions clr_float">
+    <%= f.submit "save", :class => "save_survey_evaluation" %>
+  </div>
+<% end %>

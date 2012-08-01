@@ -1,0 +1,10 @@
+<h1>Add Survey Question</h1>
+
+<%= nested_form_for setup_question, :remote => true do |f| %>
+  <%= render 'fields', :f => f %>
+
+  <div class = "actions">
+    <%= f.submit "Create Question" %>
+  </div>
+
+<% end %>

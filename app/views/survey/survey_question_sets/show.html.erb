@@ -1,0 +1,36 @@
+<h1>Survey Question Set</h1>
+
+<div class="question_set">
+  <div>
+    <label>Title :</label>
+    <span><%= @survey_question_set.title %></span>
+  </div>
+
+  <div>
+    <label>Type :</label>
+    <span><%= @survey_question_set.question_set_type %></span>
+  </div>
+
+  <div>
+    <label>Version :</label>
+    <span><%= @survey_question_set.version %></span>
+  </div>
+
+  <div>
+    <label>Questions :</label><br />
+    <% @survey_question_set.items.where('question_reference_type = ?', 'SurveyQuestion').each do |item| %>
+    <%= item.question_reference.text %> &nbsp;
+    <% item.item_conditions.each do |condition| %>
+            <%= condition.title %>
+    <% end %><br />
+    <% end %>
+  </div>
+
+  <div>
+    <label>Question Sets :</label><br />
+    <% @survey_question_set.items.where('question_reference_type = ?', 'SurveyQuestionSet').each do |item| %>
+            <%= item.question_reference.title %><br/>
+    <% end %>
+  </div>
+
+</div>

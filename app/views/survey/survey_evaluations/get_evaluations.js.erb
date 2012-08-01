@@ -1,0 +1,11 @@
+$('body').addClass('survey_evaluations');
+$.facebox("<%= escape_javascript( render 'evaluations' ) %>");
+$('#set_table_<%= @survey_question_set.id %>').dataTable({
+  "aoColumns": [
+                  null,
+                  null,
+                  null,
+                  { "bSortable": false }
+               ]
+});
+$('#edit_overlay').remove();

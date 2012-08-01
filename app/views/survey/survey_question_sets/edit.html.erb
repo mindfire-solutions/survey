@@ -1,0 +1,14 @@
+<h1>Edit Survey Question Set</h1>
+
+<%= form_for @survey_question_set, :remote => true do |f| %>
+  <%= render 'fields', :f => f %>
+
+  <div class = "actions" >
+    <% if @survey_question_set.published %>
+      <%= f.submit "Create a new version" %>
+    <% else %>
+      <%= f.submit "Update Question Set" %>
+    <% end %>
+  </div>
+
+<% end %>

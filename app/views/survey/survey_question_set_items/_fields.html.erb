@@ -1,0 +1,26 @@
+<%= render 'shared/error_messages', :object => f.object %>
+<div class="field">
+	<%= f.label :title %><br />
+	<%= f.text_field :title %>
+</div>
+
+<div class="field">
+	<%= f.label :question_set_item_type %><br />
+	<% @question_set_types = [ 1 => "Question", 2 => "Sub-assembly" ] %>
+	<%= f.select :question_set_type, @question_set_types %>
+</div>
+
+<div class="field">
+	<%= f.label :version %><br />
+	<%= f.text_field :version %>
+</div>
+
+<div class="field">
+	<%= f.check_box :published, {}, true, false %>
+	<%= f.label :published %>
+</div>
+
+<div class="field">
+	<%= f.check_box :active, {}, true, false %>
+	<%= f.label :active %>
+</div>

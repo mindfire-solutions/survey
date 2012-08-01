@@ -1,0 +1,37 @@
+=Survey
+
+Survey is a mountable engine created in rails 3.1.3 environment. It can be integrated to any rails application > 3.1.3.
+
+Basically, Survey is questionaire system that includes questions, question sets and evaluations parts.
+
+How to integrate :
+
+* Add following lines to Gemfile
+
+  gem "nested_form", :git => "git://github.com/ryanb/nested_form.git"
+
+  gem "survey", '0.0.1', :git => "git://github.com/manojm-minfire/survey_gem.git"
+
+
+* Run bundle install in the terminal.
+
+
+* Mount the engine to routes.rb as follows
+
+  mount Survey::Engine => "/survey"
+
+
+* Copy/Install the migrations in the migrate folder by running following commands
+
+  rake survey:install:migrations
+
+  rake db:migrate
+
+
+* Include Stylesheets and javascript to the layout (application.html.erb)
+
+  <%= stylesheet_link_tag "survey/application"%>
+
+  <%= javascript_include_tag "survey/application"%>
+
+* Start your rails server and point to http://your_domain/survey

@@ -1,0 +1,17 @@
+$('#edit_overlay').remove();
+$('body').addClass('survey_question_sets');
+<% if @survey_question_set.published %>
+  if (confirm("The Question set is published! Do you want to create a new version?")){
+<% end %>
+
+    <% if @facebox_id %>
+      $.facebox("<%= escape_javascript( render :template => '/survey/survey_question_sets/edit.html.erb' ) %>",
+                false, "<%= @facebox_id %>");
+    <% else %>
+      $.facebox("<%= escape_javascript( render :template => '/survey/survey_question_sets/edit.html.erb' ) %>");
+    <% end %>
+
+    $('.facebox').attr('tabindex', '1000').focus();
+<% if @survey_question_set.published %>
+  }
+<% end %>

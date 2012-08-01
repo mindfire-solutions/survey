@@ -1,0 +1,41 @@
+<%= render 'survey/shared/error_messages', :object => f.object %>
+
+<div class="field">
+  <%= f.label :category %>
+  <%= f.collection_select( :question_category_id, @categories, :id, :title ) %>
+</div>
+
+<div class="field">
+  <%= f.label :text %>
+  <%= f.text_field :text %>
+</div>
+
+<div class="field">
+  <%= f.label :question_type %>
+  <% @question_types = [ "Text Box", "Text Box(Date)", "Drop Down", "Check Box",
+    "Radio Button" ] %>
+
+  <%= f.select :question_type, @question_types %>
+</div>
+
+<div class="field">
+  <label> Version :
+    <% version = @survey_question.add_version %>
+    <%= version %>
+    <%= f.hidden_field :version, :value => version %>
+  </label>
+
+  <%= f.check_box :published, {}, true, false %>
+  <%= f.label :published %>
+  <%= f.check_box :active, {}, true, false %>
+  <%= f.label :active %>
+</div>
+
+<div id="validations">
+  <%= render 'validations', :f => f %>
+</div>
+
+<div id="selections">
+  <%= render 'selections', :f => f %>
+  <%= f.link_to_add "[+] Add A Selection", :selections %>
+</div>

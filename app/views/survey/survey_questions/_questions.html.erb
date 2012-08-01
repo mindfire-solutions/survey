@@ -1,0 +1,49 @@
+<ul>
+  <li></li>
+  <%
+    i = (Time.now.to_f * 1000).to_i
+    @condition_object = Hash.new
+    @survey_questions.each do |question|
+
+      checked = false
+      item_id = nil
+      unless @survey_question_set.nil?
+        unless question.question_set_items.nil?
+          @survey_question_set.items.each do |item|
+            if item.question_reference_type == 'Survey::SurveyQuestion' && item.question_reference == question
+              checked = true
+              item_id = item.id
+              @condition_object[item.id] = "survey_question_set[items_attributes][" + "#{i}" + "]"
+              question_index[item.id] = i
+              break
+            end
+          end
+        end
+      end
+  %>
+
+  <li class="question">
+
+    <% if !@survey_question_set.published && !item_id.nil? %>
+      <%= hidden_field "survey_question_set[items_attributes][" + "#{i}" + "]",
+        "id", :value => item_id, :class => "id_field" %>
+
+      <%= hidden_field "survey_question_set[items_attributes][" + "#{i}" + "]",
+        "_destroy", :value => 0, :class => "destroy_field" %>
+    <% end %>
+
+    <%= hidden_field "survey_question_set[items_attributes][" + "#{i}" + "]",
+      "question_reference_type", :value => "Survey::SurveyQuestion",
+      :class => "item_type" %>
+
+    <%= check_box_tag( "survey_question_set[items_attributes][" + "#{i}" + "][question_reference_id]",
+      question.id, checked ) %>
+
+    <%= label_tag( "survey_question_set_items_attriutes_#{i}_question_reference_id",
+      question.text + " (" + question.version + ")" ) %>
+    <% i += 1 %>
+
+  </li>
+
+<% end %>
+</ul>

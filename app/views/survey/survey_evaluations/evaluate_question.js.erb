@@ -1,0 +1,22 @@
+var item_id = '<%= @item_id %>';
+var item_opt_id = item_id.substring(0, item_id.lastIndexOf('_'));
+if($('#selected_question .evaluation').length > 0) {
+	if($('#selected_question div[id^="evaluate_item_'+item_opt_id+'"]').length <= 0) {
+  	item_id_opt = item_opt_id.substring(0, item_opt_id.lastIndexOf('_')+3)
+
+  	if($('#selected_question div[id^="evaluate_item_'+item_id_opt+'"]').length > 0) {
+  	  $('#selected_question div[id^="evaluate_item_'+item_id_opt+'"]').remove();
+  	}
+	}
+}
+
+$('#selected_question').append("<%= escape_javascript( render 'evaluation_fields' ) %>");
+
+/*Initialize datepicker*/
+$('.datepicker').datepicker({
+  dateFormat: 'dd/mm/yy',
+  showOn: "both",
+  buttonImage: '/assets/survey/calendar.gif',
+  buttonImageOnly: true
+});
+$('#edit_overlay, #evaluation_overlay').remove();

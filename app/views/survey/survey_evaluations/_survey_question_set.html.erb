@@ -1,0 +1,17 @@
+<% @survey_question_sets.each do |survey_question_set| %>
+  <tr>
+    <td id="<%= survey_question_set.id %>" class="evaluation_title" title="Click to see the evaluations made on this Question Set">
+      <%= survey_question_set.title %>
+    </td>
+    <td>
+      <%= survey_question_set.version %>
+    </td>
+    <td>
+      <%= form_tag '/survey/survey_evaluations', :remote => true do %>
+        <%= hidden_field_tag "question_set_id", survey_question_set.id %>
+        <%= hidden_field_tag "status", "started" %>
+        <%= submit_tag("New") %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

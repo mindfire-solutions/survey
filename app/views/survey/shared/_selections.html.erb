@@ -1,0 +1,23 @@
+<%= f.label "Add Selections" %>
+<div id="validation_list">
+  <% @selections = @selected_question.selections.all %>
+  <% i = 0 %>
+  <% @selections.each do |selection| %>
+    <% i += 1 %>
+    <%= f.fields_for :condition_selections_attributes, :index => ( index.to_s + i.to_s ) do |ff| %>
+      <div class="fields">
+        <%
+          condition_selection = condition.condition_selections.where("selection_id = ?", selection.id ).first
+          checked = true if condition_selection
+          if condition_selection && !@survey_question_set.published
+        %>
+            <%= ff.hidden_field :id, :value => condition_selection.id, :class => "id_field" %>
+            <%= ff.hidden_field :_destroy, :value => 0, :class => "destroy_field" %>
+        <% end %>
+        
+        <%= ff.check_box :selection_id, { :checked => checked }, selection.id, nil %>
+        <%= ff.label "selection_id", selection.text %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

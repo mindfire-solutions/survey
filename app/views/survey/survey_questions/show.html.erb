@@ -1,0 +1,38 @@
+<h1>Survey Question</h1>
+
+<div class="questions">
+  <div>
+    <label>Text :</label>
+    <%= @survey_question.text %>
+  </div>
+
+  <div>
+    <label>Type :</label>
+    <%= @survey_question.question_type %>
+  </div>
+
+  <div>
+    <label>Version :</label>
+    <%= @survey_question.version %>
+  </div>
+
+  <% if @survey_question.question_type == "Text Box" %>
+
+    <div>
+      <label>Validation :</label><br />
+      <% @survey_question.survey_question_validations.each do |ques_val| %>
+        <%= ques_val.validation.title %> <br />
+      <% end %>
+    </div>
+
+  <% else %>
+
+    <div>
+      <label>Selections :</label><br />
+      <% @survey_question.selections.each do |selection| %>
+        <%= selection.text %> <br />
+      <% end %>
+    </div>
+  <% end %>
+
+</div>

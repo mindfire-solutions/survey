@@ -1,0 +1,94 @@
+<ul class="items">
+  <li>Title</li>
+  <%
+    unless @survey_question_set.items.blank?
+      @survey_question_set.items.each do |item|
+        if item.question_reference_type == "Survey::SurveyQuestion"
+  %>
+          <li>
+            <span class="title">
+
+              <% if !@survey_question_set.published %>
+                <%= hidden_field_tag "survey_question_set[items_attributes][" + "#{question_index[item.id]}" + "][id]", item.id, :class => "id_field" %>
+
+                <%= hidden_field_tag "survey_question_set[items_attributes][" + "#{question_index[item.id]}" + "][_destroy]", 0, :class => "destroy_field" %>
+
+              <% end %>
+
+              <%= hidden_field_tag "survey_question_set[items_attributes][" + "#{question_index[item.id]}" + "][question_reference_type]",
+                "Survey::SurveyQuestion", :class => "item_type" %>
+
+              <%= check_box_tag( "survey_question_set[items_attributes][" + "#{question_index[item.id]}" + "][question_reference_id]",
+                item.question_reference_id, true ) %>
+
+              <%= label_tag( "survey_question_set_items_attriutes_#{question_index[item.id]}_question_reference_id",
+                item.question_reference.text + " (" + item.question_reference.version + ")" ) %>
+
+            </span>
+
+            <span class="item_type"> question </span>
+
+            <span class="actions"><a href="#" class="remove_item"> remove </a></span>
+          </li>
+  <%
+        else
+          if item.question_reference_type == "Survey::SurveyQuestionSet"
+  %>
+            <li class="question_set">
+              <span class="title">
+                <% quest_index = question_index[item.id].to_s %>
+                <% if !@survey_question_set.published %>
+                  <%= hidden_field_tag "survey_question_set[items_attributes][" + quest_index + "][id]", item.id, :class => "id_field" %>
+
+                  <%= hidden_field_tag "survey_question_set[items_attributes][" + quest_index + "][_destroy]", 0, :class => "destroy_field" %>
+                <% end %>
+
+                <%= hidden_field_tag "survey_question_set[items_attributes][" + quest_index + "[question_reference_type]",
+                  "Survey::SurveyQuestionSet", :class => "item_type" %>
+
+                <%= check_box_tag("survey_question_set[items_attributes][#{question_index[item.id]}][question_reference_id]",
+                  item.question_reference_id, true ) %>
+                <%= label_tag( "survey_question_set_items_attriutes_#{question_index[item.id]}_question_reference_id",
+                  item.question_reference.title + " (" + item.question_reference.version + ")" ) %>
+              </span>
+
+              <span class="item_type"> question_set </span>
+
+              <span class="actions"><a href="#" class="remove_item"> remove </a></span>
+            </li>
+  <%
+          end
+        end
+      end
+    end
+  %>
+</ul>
+<div class="item_conditions">
+    <span class="add_link">
+      <%= link_to  "Add Condition", '#', :class => "add_condition" %>
+    </span>
+
+    <% unless @item_conditions.nil? %>
+      <% @item_conditions.each do |id, conditions| %>
+        <div id="item_<%= id %>" class="conditions_container">
+
+        <% conditions.each do |index, condition| %>
+          <div class="conditions <%= index %> <%= condition.parameterize %>">
+            <span class="title">
+              <%= condition %>
+            </span>
+
+            <span class="actions">
+              <%= link_to "edit", "#", :class => "edit_condition", :condition => index %>
+            </span>
+
+            <span class="actions">
+              <%= link_to "remove", "#", :class => "remove_condition", :condition => index %>
+            </span>
+
+          </div>
+        <% end %>
+        </div>
+      <% end %>
+    <% end %>
+</div>

@@ -1,0 +1,31 @@
+<tr>
+
+  <% html_class = survey_question_set.published ? 'edit edit_published_set' : 'edit' %>
+  <td class="question_set_title">
+    <%= survey_question_set.title %>
+  </td>
+
+  <td>
+    <%= survey_question_set.version %>
+  </td>
+
+  <td>
+    <%= survey_question_set.published ? 'published' : 'draft' %>
+  </td>
+
+  <td class="actions">
+    <%= link_to "Edit", edit_survey_question_set_path( survey_question_set ),
+      :remote => true, :class => html_class, :title => "Edit question set" %>
+
+      <% unless survey_question_set.published %>
+        <%= link_to "Delete", survey_question_set_path( survey_question_set ),
+          :method => :delete, :confirm => 'Are you sure?', :class => "delete",
+          :title => "Delete question set" %>
+
+      <% else %>
+        <%= link_to "Delete", "#", :onclick => "return false",
+          :class => "disabled_delete", :title => "Disabled" %>
+      <% end %>
+  </td>
+
+</tr>

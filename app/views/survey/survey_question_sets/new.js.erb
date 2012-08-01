@@ -1,0 +1,10 @@
+$('body').addClass('survey_question_sets');
+<% if @facebox_id %>
+  $.facebox("<%=  escape_javascript( render :template => '/survey/survey_question_sets/new.html.erb' ) %>",
+    false, "<%= @facebox_id %>");
+<% else %>
+  $.facebox("<%=  escape_javascript( render :template => '/survey/survey_question_sets/new.html.erb' ) %>");
+<% end %>
+
+$('.facebox').attr('tabindex', '1000').focus();
+$('#edit_overlay').remove();

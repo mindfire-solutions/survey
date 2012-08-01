@@ -1,0 +1,24 @@
+<ul>
+  <% Survey::SurveyQuestionCategory.find(:all, :conditions => {:parent_id => parent}).each do |cat| %>
+    <li>
+      <%
+        remote_link = {:controller => "survey_questions",
+          :action => "get_questions", :category => cat.id, :id => @set_id }
+        
+        remote_link[:item] = item if item
+      %>
+      <div class="expand_or_collapse">
+        <% unless cat.children.blank? %>
+          <span class="expand">[+]</span>
+          <span class="collapse">[&dash;]</span>
+        <% else %>
+          <span class="dot">.</span>
+        <% end %>
+      </div>
+      <%= link_to cat.title, remote_link, :remote => true, :id => "cat-#{cat.id}" %>
+      <% parent = cat.id %>
+      <%= render 'survey/survey_question_categories/question_categories',
+        :parent => parent, :item => item %>
+    </li>
+  <% end %>
+</ul>

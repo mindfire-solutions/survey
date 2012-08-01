@@ -1,0 +1,35 @@
+$('#edit_overlay').remove();
+
+<% if @survey_question.published %>
+  if (confirm("The Question is published! Do you want to create a new version?")){
+<% end %>
+    <% if @facebox_id %>
+      $.facebox("<%= escape_javascript( render :template => '/survey/survey_questions/edit.html.erb' ) %>", false, "<%= @facebox_id %>");
+    <% else %>
+      $.facebox("<%= escape_javascript( render :template => '/survey/survey_questions/edit.html.erb' ) %>");
+    <% end %>
+
+    $('.facebox').attr('tabindex', '1000').focus();
+    $('.fields').parent('.fields').children('input[type="hidden"]').remove();
+    if ($('#survey_question_question_type').length > 0) {
+      question_type = $('#survey_question_question_type').val();
+      if (question_type == "Text Box") {
+        $('#selections').css('display', 'none');
+        $('#selections').children('.fields').children('input').attr('disabled', 'disabled');
+      }
+      else if (question_type == "Text Box(Date)") {
+        $('#validations, #selections').css('display', 'none');
+        $('#validations').children('.fields').children('input').attr('disabled', 'disabled');
+        $('#selections').children('.fields').children('input').attr('disabled', 'disabled');
+      }
+      else {
+        $('#validations').css('display', 'none');
+        $('#validations').children('.fields').children('input').attr('disabled', 'disabled');
+      }
+    }
+
+<% if @survey_question.published %>
+  }
+<% end %>
+
+$('.published').parent('span').next('input[type=hidden]').remove();

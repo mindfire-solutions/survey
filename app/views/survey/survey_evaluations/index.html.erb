@@ -1,0 +1,35 @@
+<div class="section survey_evaluation">
+  <h1>Survey Evaluation</h1>
+
+  <div class="categories">
+    <%= link_to "All",
+      { :controller => "survey_questions", :action => "get_questions",
+        :category => "all", :item => "survey_evaluation" },
+      :remote => true, :id => "cat-all" %>
+
+    <div class="add_category">
+      <%= link_to "Add", new_survey_question_category_path, :remote => true,
+        :title => "Add a new category" if current_user.admin? %>
+    </div>
+
+    <%= render 'survey/survey_question_categories/question_categories', :parent => nil,
+      :item => 'survey_evaluation' %>
+  </div>
+
+  <div class="list_content">
+    <p class="description">
+      *Click on a Question Set to see the list of evaluations made
+    </p>
+    <table id="evaluation_list" class="survey_evaluations">
+      <thead>
+        <th>Question Set</th>
+        <th>Version</th>
+        <th>Actions</th>
+      </thead>
+
+      <tbody>
+        <%= render "survey_question_set" %>
+      </tbody>
+    </table>
+  </div>
+</div>

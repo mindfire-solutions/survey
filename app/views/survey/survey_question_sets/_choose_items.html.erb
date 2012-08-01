@@ -1,0 +1,26 @@
+<div class="choose_from">
+  <%= radio_button_tag "choose_from", "all", true %>
+  <%= label_tag :choose_from_all, "All Categories" %>
+  <%= radio_button_tag "choose_from", "category" %>
+  <%= label_tag :choose_from_category, "Select Category" %>
+
+  <div id="list_question_categories"></div>
+</div>
+
+<div class="show_category_items">
+  <div class="tabs">
+    <span id="questions" class="tab selected">Questions</span>
+
+    <span id="question_sets" class="tab">Question Sets</span>
+  </div>
+
+  <div id="show_questions">
+    <%= render 'survey/survey_questions/questions',
+      :question_index => question_index %>
+  </div>
+  
+  <div id="show_question_sets" class="hidden">
+    <%= render 'question_sets', :question_index => question_index %>
+  </div>
+</div>
+<div class="clr_float"></div>

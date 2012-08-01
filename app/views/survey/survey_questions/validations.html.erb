@@ -1,0 +1,27 @@
+<%= f.label "Add Validations" %>
+
+<%= f.fields_for :survey_question_validations do |ff| %>
+
+  <div class="fields">
+    <span>
+      <%= ff.check_box :_destroy, {:checked => ff.object.persisted?}, '0', '1' %>
+      <%= ff.label :_destroy, ff.object.validation.title %>
+      <%= ff.hidden_field :validation_id %>
+    </span>
+
+    <% unless ff.object.validation.param_1_caption.nil? %>
+      <span>
+        <%= ff.label :validation_param_1, ff.object.validation.param_1_caption %>
+        <%= ff.text_field :validation_param_1, :size => 2 %>
+      </span>
+    <% end %>
+
+    <% unless ff.object.validation.param_2_caption.nil? %>
+      <span>
+        <%= ff.label :validation_param_2, ff.object.validation.param_2_caption %>
+        <%= ff.text_field :validation_param_2, :size => 2 %>
+      </span>
+    <% end %>
+
+  </div>
+<% end %>

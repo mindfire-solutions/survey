@@ -1,0 +1,71 @@
+<%= render 'survey/shared/error_messages', :object => f.object %>
+<div class="field">
+  <%= f.label :category %>
+  <%= f.collection_select( :question_category_id, @categories, :id, :title ) %>
+</div>
+
+<div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+
+<div class="field">
+  <%= f.label :question_set_type %>
+  <% @question_set_types = [ "Assembly", "Sub-assembly" ] %>
+  <%= f.select :question_set_type, @question_set_types %>
+</div>
+
+<div class="field">
+  <label> Version :
+    <% version = @survey_question_set.add_version %>
+    <%= version %>
+    <%= f.hidden_field :version, :value => version %>
+  </label>
+
+  <%= f.check_box :published, {}, true, false %>
+  <%= f.label :published %>
+  <%= f.check_box :active, {}, true, false %>
+  <%= f.label :active %>
+</div>
+
+<div class="tabs">
+  <span id="choose_items" class="tab selected">Choose</span>
+  <span id="selected_items" class="tab">Selected</span>
+</div>
+
+<% question_index = Hash.new %>
+
+<div id="show_choose_items">
+  <%= render 'choose_items', :question_index => question_index %>
+</div>
+
+<div id="hidden_conditions">
+    <%
+      unless @survey_question_set.new_record?
+        index = 0
+        @item_conditions = Hash.new
+        @survey_question_set.items.each do |item|
+          if item.question_reference_type == "Survey::SurveyQuestion"
+            @item_conditions[item.question_reference_id] = Hash.new
+            item.item_conditions.each do |condition|
+              @field_object = @condition_object[item.id]
+              builder = ActionView::Helpers::FormBuilder.new( "#{@field_object}",
+                                                      condition, self, {}, proc {})
+              @selected_question = item.question_reference
+    %>
+
+    <%= render 'condition_fields', :f => builder, :index => index,
+                    :condition => condition, :field_object => @field_object %>
+    <%
+              @item_conditions[item.question_reference_id][index] = condition.title
+              index += 1
+            end
+          end
+        end
+      end
+    %>
+</div>
+
+<div id="show_selected_items" class="hidden">
+  <%= render 'selected_items', :f => f, :question_index => question_index %>
+</div>

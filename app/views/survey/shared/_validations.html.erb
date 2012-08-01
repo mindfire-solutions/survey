@@ -1,0 +1,55 @@
+<div id="validations">
+  <%= f.label "Add Validations" %>
+  <div id="validation_list">
+    <%
+      @validations = Survey::SurveyValidation.all
+      @obj = @object ? @object : @field_object
+      i = 10000000
+      @validations.each do |validation|
+        condition_validation = condition.condition_validations.where("validation_id = #{validation.id}").first
+        unless condition_validation.nil?
+          param1 = condition_validation.validation_param_1
+          param2 = condition_validation.validation_param_2
+        end
+    %>
+      <%= f.fields_for :condition_validations_attributes, :index => i do |ff| %>
+        <div class="fields">
+          <span class="validation_title">
+            <% if condition_validation && !@survey_question_set.published %>
+              <%= ff.hidden_field :id, :value => condition_validation.id, :class => "id_field" %>
+              <%= ff.hidden_field :_destroy, :value => 0, :class => "destroy_field" %>
+            <% end %>
+            <%
+             validation_id = "#{@obj}[item_conditions_attributes][#{index}]"
+             validation_id += "[condition_validations_attributes][#{i}][validation_id]"
+            %>
+            <%= check_box_tag validation_id, validation.id, condition_validation %>
+            <%= ff.label validation.title %>
+          </span>
+
+          <% unless validation.param_1_caption.nil? %>
+            <span class="validation_params">
+              Validation Parameters: <br/>
+              <div>
+                <%= ff.label :validation_param_1, validation.param_1_caption %>
+                <%= ff.text_field :validation_param_1, :size => 2,
+                                :value => param1, :disabled => param1.nil? %>
+              </div>
+
+              <% unless validation.param_2_caption.nil? %>
+                <div>
+                  <%= ff.label :validation_param_2, validation.param_2_caption %>
+                  <%= ff.text_field :validation_param_2, :size => 2,
+                                        :value => param2, :disabled => param2.nil? %>
+                </div>
+              <% end %>
+            </span>
+          <% end %>
+
+        </div>
+
+      <% end %>
+      <% i += 1 %>
+    <% end %>
+  </div>
+</div>

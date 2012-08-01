@@ -1,0 +1,70 @@
+<% unless @survey_question_set.nil? %>
+  $("#show_questions").html("<%= escape_javascript( render 'survey/survey_questions/questions' ) %>");
+  $("#show_question_sets").html("<%= escape_javascript( render 'survey/survey_question_sets/question_sets' ) %>");
+
+  $('#show_selected_items ul.items li input[type="checkbox"]:checked').each(function(){
+    chkbox = $(".show_category_items input[type=checkbox][value="+$(this).val()+"]");
+
+    if($(chkbox).length > 0 && ($(this).prev('.item_type').val() == "Survey::SurveyQuestion"))
+      $(".show_category_items li.question input[type=checkbox][value="+$(this).val()+"]").attr('checked', 'checked');
+    else
+      $(".show_category_items li.question_set input[type=checkbox][value="+$(this).val()+"]").attr('checked', 'checked');
+  });
+<% else %>
+
+  <% if @item == 'survey_evaluation' %>
+    $("#evaluation_list_wrapper").remove();
+
+    return_str = '<table id="evaluation_list" class="survey_evaluations">\
+                    <thead>\
+                      <th>Question Set</th>\
+                      <th>Version</th>\
+                      <th>Actions</th>\
+                    </thead>\
+                    <tbody>\
+                      <%= escape_javascript(render "survey/survey_evaluations/survey_question_set") %>\
+                    </tbody>\
+                  </table>';
+
+    $(".list_content").append(return_str);
+    $('#evaluation_list').dataTable({
+      "aoColumns": [
+                      null,
+                      null,
+                      { "bSortable": false }
+                   ]
+    });
+
+  <% else %>
+    $("div.add_question, div.add_question_set").next().remove();
+
+    return_str = '<table id="questions_list" class="survey_questions display">\
+                    <thead>\
+                      <th>Title</th>\
+                      <th>Version</th>\
+                      <th>Status</th>\
+                      <th>Actions</th>\
+                    </thead>\
+                    <tbody>';
+
+    <% if @item == 'survey_question' %>
+      return_str += '<%= escape_javascript(render @survey_questions) %>';
+    <% else %>
+      return_str += '<%= escape_javascript(render @survey_question_sets) %>';
+    <% end %>
+
+    return_str += '</tbody>\
+                  </table>';
+
+    $('.list_content').append(return_str);
+
+    $('#questions_list').dataTable({
+      "aoColumns": [
+                      null,
+                      null,
+                      null,
+                      { "bSortable": false }
+                   ]
+    });
+  <% end %>
+<% end %>

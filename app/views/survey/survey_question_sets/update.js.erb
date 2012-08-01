@@ -1,0 +1,2 @@
+$('div#error_explanation').remove();
+$('.facebox form').prepend("<%= escape_javascript(render 'survey/shared/error_messages', :object => @survey_question_set) %>")

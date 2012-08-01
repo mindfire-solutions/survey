@@ -1,0 +1,82 @@
+<%
+  @parent = 0 if @parent.nil?
+  condition = @question_set_item.nil? || @question_set_item.item_conditions.nil? ? 0 : 1
+  index = (Time.now.to_f * 1000).to_i.to_s
+  answer_text = @evaluation_item.nil? ? nil : @evaluation_item.answer_text
+%>
+<div id="evaluate_item_<%= @item_id %>" class="evaluation">
+  <h4>Evaluate Question</h4>
+
+  <div>
+    <label>Question : </label><br/>
+    <%= @question.text %>
+  </div>
+
+  <div>
+    <label>Answer : </label><br/>
+    <%
+        answer_string = answer_text
+        case @question.question_type
+        when "Text Box"
+          validation_text = "";
+          @question.survey_question_validations.each do |val|
+            validation = val.validation
+            validation_text += validation.title.split("?")[0] + "(this"
+            validation_text += ", " + val.validation_param_1 unless validation.param_1_caption.nil?
+            validation_text += ", " + val.validation_param_2 unless validation.param_2_caption.nil?
+            validation_text += "); "
+          end
+
+          validation_text += "return validate(this);"
+
+          fields = text_field( @object + "["+index+"]", "answer_text",
+            :value => answer_text, :class => "answer_text",
+            :onblur => validation_text )
+
+        when "Check Box"
+          fields = ""
+          i = 0
+          answers = answer_text ? answer_text.split( ',' ) : []
+          @question_selections.each do |selection|
+            checked = answers.include? selection.id.to_s
+            fields += check_box_tag( "selection_#{i}", selection.id, checked )
+            fields += label_tag( "selection_#{i}", selection.text, :class => 'selection_label' ) + '<br/>'.html_safe
+            i += 1
+          end
+
+          fields += hidden_field_tag( @object + "["+index+"][answer_text]",
+            answer_string, :class => "selections" )
+
+        when "Radio Button"
+          fields = ""
+          @question_selections.each do |selection|
+            checked = (answer_text == selection.id.to_s )
+            fields += radio_button_tag( @object + "["+index+"][answer_text]",
+              selection.id, checked )
+
+            fields += label_tag( "survey_evaluation_evaluation_items_attributes_#{index}_answer_text",
+              selection.text, :class => 'selection_label' ) + '<br/>'.html_safe
+          end
+
+        when "Drop Down"
+          fields = collection_select( @object + "["+index+"]", "answer_text",
+            @question_selections, :id, :text, { :selected => answer_string } )
+        when "Text Box(Date)"
+                date_value = answer_text unless answer_text.nil?
+                fields = text_field( @object + "["+index+"]", "answer_text",
+                  :class => "datepicker", :value => date_value, :readonly => true )
+        end
+    %>
+    <%= hidden_field_tag( @object + "["+index+"][id]", @evaluation_item.id ) if @evaluation_item %>
+    <%= hidden_field_tag( @object + "["+index+"][question_set_item_id]", @question_set_item.id ) if @question_set_item %>
+    <%= hidden_field_tag( @object + "["+index+"][question_id]", @question.id ) %>
+    <%= fields.html_safe %>
+    <!--<%= hidden_field_tag( @object + "["+index+"][parent_id]", @parent ) %>-->
+    <%= hidden_field_tag( @object + "["+index+"][level]", @level, :class => "level" ) %>
+    <%= hidden_field_tag( "condition", condition ) %>
+  </div>
+  
+  <div>
+    <%= button_tag "Evaluate", :class => 'evaluate_question' %>
+  </div>
+</div>

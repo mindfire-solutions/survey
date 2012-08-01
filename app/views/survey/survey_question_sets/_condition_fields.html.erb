@@ -1,0 +1,70 @@
+<% if @selected_question.question_type == "Text Box(Date)" %>
+  No Condition can be added for questions with dates.
+<% else %>
+<% index ||= "__index__"%>
+
+<div id="condition_<%= index %>" class="condition_fields condition_for_<%= @selected_question.id %>">
+  <%= f.fields_for "item_conditions_attributes", :index => index do |ff| %>
+
+    <% if !@survey_question_set.nil? && !@survey_question_set.published %>
+      <%= ff.hidden_field :id, :value => condition.id, :class => "id_field" %>
+      <%= ff.hidden_field :_destroy, :value => 0, :class => "destroy_field" %>
+    <% end %>
+
+    <div class="fields">
+      <%= ff.label :title %>
+      <%= ff.text_field :title, :class => 'condition_title',
+        :value => condition.title %>
+    </div>
+
+    <div class="fields">
+      <%= label_tag "reference", "Reference to" %> :
+
+      <%= ff.radio_button :reference_type, "1",
+        :checked => ( condition.reference_type != 2 ),
+        :class => 'condition_reference_type' %>
+      <%= ff.label :reference_type_1, "Question" %>
+
+      <%= ff.radio_button :reference_type, "2",
+        :checked => ( condition.reference_type == 2 ),
+        :class => 'condition_reference_type' %>
+      <%= ff.label :reference_type_2, "Question Set" %>
+    </div>
+
+    <div class="fields">
+      <%= ff.label :reference_id, "Reference" %> :
+
+      <% if condition.reference_type == 2 %>
+        <% @reference = Survey::SurveyQuestionSet.where('published = ?', true) %>
+        <%= ff.collection_select :reference_id, @reference, :id,
+          :title_with_version, {:selected => condition.reference_id},
+          :class => "condition_reference" %>
+      <% else %>
+        <% @reference = Survey::SurveyQuestion.where('published = ?', true) %>
+        <%= ff.collection_select :reference_id, @reference, :id,
+          :title_with_version, {:selected => condition.reference_id},
+          :class => "condition_reference" %>
+      <% end %>
+    </div>
+
+    <div class="fields">
+      <% if @selected_question.question_type == "Text Box" %>
+        <%= render 'survey/shared/validations', :f => ff, :condition => condition,
+          :index => index %>
+      <% else %>
+        <% if @selected_question.question_type != "Text Box(Date)" %>
+          <%= render 'survey/shared/selections', :f => ff, :condition => condition,
+            :index => index %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <%= button_tag "Save Condition", :name => 'action', :value => 'add',
+        :question => @selected_question.id %>
+      <%= button_tag "Cancel", :name => 'action', :value => 'cancel' %>
+    </div>
+
+  <% end %>
+</div>
+<% end %>

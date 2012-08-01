@@ -1,0 +1,12 @@
+<%= render 'survey/shared/error_messages', :object => f.object %>
+<div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+
+<div class="field">
+  <%= f.label :parent %>
+  <% @categories = Survey::SurveyQuestionCategory.find( :all, :order => :title) %>
+  <%= f.collection_select( :parent_id, @categories, :id, :title,
+    :include_blank => 'None' ) %>
+</div>

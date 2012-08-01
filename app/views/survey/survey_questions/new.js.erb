@@ -1,0 +1,23 @@
+<% if @facebox_id %>
+  $.facebox("<%= escape_javascript( render :template => '/survey/survey_questions/new.html.erb' ) %>", false, "<%= @facebox_id %>");
+<% else %>
+  $.facebox("<%= escape_javascript( render :template => '/survey/survey_questions/new.html.erb' ) %>");
+<% end %>
+
+$('.facebox').attr('tabindex', '1000').focus();
+$('.fields').parent('.fields').children('input[type="hidden"]').remove();
+if ($('#survey_question_question_type').length > 0)
+{
+  if ($('#survey_question_question_type').val() != "Text Box")
+  {
+    $('#validations').css('display', 'none');
+    $('#validations').children('.fields').children('input').attr('disabled', 'disabled');
+  }
+  else
+  {
+    $('#selections').css('display', 'none');
+    $('#selections').children('.fields').children('input').attr('disabled', 'disabled');
+  }
+}
+
+$('#edit_overlay').remove();

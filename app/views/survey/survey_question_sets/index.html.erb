@@ -1,0 +1,37 @@
+<div class="section survey_question_sets">
+  <h1>Survey Question Sets</h1>
+
+  <div class="categories">
+    <%= link_to "All",
+      { :controller => "survey_questions", :action => "get_questions",
+        :category => "all", :item => "survey_question_set" },
+      :remote => true, :id => "cat-all" %>
+
+    <div class="add_category">
+      <%= link_to "Add", new_survey_question_category_path, :remote => true,
+        :title => "Add a new category" %>
+    </div>
+
+    <%= render 'survey/survey_question_categories/question_categories', :parent => nil,
+      :item => 'survey_question_set' %>
+  </div>
+
+  <div class="list_content">
+    <div class="add_question_set">
+      <%= link_to "Add", new_survey_question_set_path, :remote => true, :title => "Add a new question set" %>
+    </div>
+
+    <table id="questions_list" class="survey_question_sets display">
+      <thead>
+        <th>Title</th>
+        <th>Version</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </thead>
+
+      <tbody>
+        <%= render @survey_question_sets %>
+      </tbody>
+    </table>
+  </div>
+</div>

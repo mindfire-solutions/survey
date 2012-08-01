@@ -1,0 +1,16 @@
+<h1>Edit Survey Question</h1>
+
+<%= nested_form_for setup_question, :remote => true do |f| %>
+  <%= render 'fields', :f => f %>
+
+  <div class = "actions" >
+
+    <% if @survey_question.published %>
+      <%= f.submit "Create a new version" %>
+    <% else %>
+      <%= f.submit "Update Question" %>
+    <% end %>
+
+  </div>
+
+<% end %>

@@ -1,0 +1,10 @@
+<div class="fields">
+
+  <% if !@survey_question.published && ff.object.persisted? %>
+    <%= ff.hidden_field :id, :class => "id_field" %>
+    <%= ff.hidden_field :_destroy, :value => 0, :class => "destroy_field" %>
+  <% end %>
+
+  <%= ff.text_field :text%>
+  <%= link_to "[-] Remove", "#", :class => 'remove_link' %>
+</div>

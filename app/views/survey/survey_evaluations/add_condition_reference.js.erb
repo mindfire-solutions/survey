@@ -1,0 +1,36 @@
+if($('span.item_<%= @question_set_item.id %>').parent().children('ul.reference').length > 0)
+	$('span.item_<%= @question_set_item.id %>').parent().children('ul.reference').remove();
+
+<%
+  unless @conditions.blank?
+    @conditions.each do |condition|
+      return_str = '<ul class="reference"><li>'
+      if condition.reference_type == 1
+        item_id = @question_set_item.id.to_s + '_opt'
+      	item_id += @selected_value + '_q' + condition.reference_id.to_s
+        question = Survey::SurveyQuestion.find( condition.reference_id )
+        return_str += '<span class="title item_'+item_id+'">' + hidden_field_tag( "item_id", item_id )
+        return_str += hidden_field_tag( "question_id", condition.reference_id )
+        return_str += hidden_field_tag( "level", @level )
+        return_str += hidden_field_tag( "object", @object )
+        return_str += question.text + '</span>'
+      else
+        set = Survey::SurveyQuestionSet.find( condition.reference_id )
+        return_str += '<span class="expand_or_collapse">'
+        return_str += '<span class="expand">[+]</span><span class="collapse">[-]</span>'
+        return_str += '</span>'
+        return_str += '<span class="title">' + set.title + '</span>'
+        return_str += evaluate_sets( set, '', @level )
+      end
+      
+      return_str += '</li></ul>'
+%>
+  $('span.item_<%= @question_set_item.id %>').parent().append('<%= return_str.html_safe %>');
+<%
+    end
+  end
+
+  if !@errors.blank? && @conditions.blank?
+%>
+    $('#evaluate_item_<%= @question_set_item.id %>').find('input[type=text]').css('border', '1px solid red');
+<% end %>

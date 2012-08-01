@@ -1,0 +1,11 @@
+<h1>Add Survey Question Category</h1>
+
+<%= form_for @survey_question_category, :remote => true do |f| %>
+
+  <%= render 'fields', :f => f %>
+
+  <div class = "actions">
+    <%= f.submit "Create Category" %>
+  </div>
+
+<% end %>

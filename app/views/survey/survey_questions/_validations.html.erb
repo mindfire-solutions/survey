@@ -1,0 +1,39 @@
+<%= f.label "Add Validations" %>
+
+<div id="validation_list">
+  <%= f.fields_for :survey_question_validations do |ff| %>
+    <span class="validation_title">
+      <% html_class = ff.object.persisted? ? 'published' : '' %>
+
+      <% if ff.object.persisted? && !@survey_question.published %>
+        <%= ff.hidden_field :id, :class => "id_field" %>
+      <% end %>
+
+      <%= ff.check_box :_destroy,
+        {:checked => ff.object.persisted?, :class => html_class }, '0', '1' %>
+
+      <%= ff.label :__destroy, ff.object.validation.title %>
+      <%= ff.hidden_field :validation_id %>
+    </span>
+
+    <% unless ff.object.validation.param_1_caption.nil? %>
+      <span class="validation_params">
+        Validation Parameters: <br/>
+
+        <div>
+          <%= ff.label :validation_param_1, ff.object.validation.param_1_caption %>
+          <%= ff.text_field :validation_param_1, :size => 2, :disabled => !ff.object.persisted? %>
+        </div>
+
+        <% unless ff.object.validation.param_2_caption.nil? %>
+          <div>
+            <%= ff.label :validation_param_2, ff.object.validation.param_2_caption %>
+            <%= ff.text_field :validation_param_2, :size => 2, :disabled => !ff.object.persisted? %>
+          </div>
+        <% end %>
+      </span>
+
+    <% end %>
+
+  <% end %>
+</div>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Survey</title>
+  <%= stylesheet_link_tag    "survey/application" %>
+  <%= javascript_include_tag "survey/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= @html_class %>">
+  <div class="section">
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, :class => "flash #{key}") %>
+    <% end %>
+    
+    <%= yield %>
+    <div class="clr_float"></div>
+  </div>
+</body>
+</html>

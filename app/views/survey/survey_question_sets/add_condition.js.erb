@@ -1,0 +1,18 @@
+<%
+  condition = Survey::SurveyQuestionSetItemCondition.new
+  builder = ActionView::Helpers::FormBuilder.new( "#{@object}", condition, self,
+    {}, proc {})
+%>
+var index = new Date() * 1 + parseInt(Math.random()*100000);
+
+function newCondition() {
+  var basic = "<%= escape_javascript(render 'condition_fields', :f => builder, :condition => condition) %>";
+  while (basic.indexOf("__index__") != -1) basic = basic.replace("__index__", index);
+  return basic;
+}
+
+$.facebox(newCondition(), false, 'facebox' + index);
+$('#facebox' + index + ' .content').css('width', '400px');
+left = parseFloat($('#facebox' + index).css('left').substring(-2)) + 150;
+$('#facebox' + index).css('left', left + 'px');
+$('#edit_overlay').remove();
